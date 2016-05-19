@@ -1,0 +1,27 @@
+Index: knxd-0.10.1/m4/pthsem.m4
+===================================================================
+--- knxd-0.10.1.orig/m4/pthsem.m4
++++ knxd-0.10.1/m4/pthsem.m4
+@@ -111,16 +111,16 @@ if test ".$with_pth" != .no; then
+     if test ".$with_pth" = .yes; then
+         #   via config script in $PATH
+         changequote(, )dnl
+-        _pth_version=`(pthsem-config --version) 2>/dev/null |\
++        _pth_version=`(pkg-config --modversion pthsem) 2>/dev/null |\
+                       sed -e 's/^.*\([0-9]\.[0-9]*[ab.][0-9]*\).*$/\1/'`
+         changequote([, ])dnl
+         if test ".$_pth_version" != .; then
+-            _pth_location=`pthsem-config --prefix`
++            _pth_location=/usr
+             _pth_type='installed'
+-            _pth_cppflags=`pthsem-config --cflags`
+-            _pth_cflags=`pthsem-config --cflags`
+-            _pth_ldflags=`pthsem-config --ldflags`
+-            _pth_libs=`pthsem-config --libs --all`
++            _pth_cppflags=`pkg-config --cflags pthsem`
++            _pth_cflags=`pkg-config --cflags pthsem`
++            _pth_ldflags=`pkg-config --cflags pthsem`
++            _pth_libs=`pkg-config --libs pthsem`
+         fi
+     elif test -d "$with_pth"; then
+         with_pth=`echo $with_pth | sed -e 's;/*$;;'`
