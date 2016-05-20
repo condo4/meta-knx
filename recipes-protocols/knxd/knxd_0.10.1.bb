@@ -11,6 +11,7 @@ inherit autotools-brokensep gettext pkgconfig
 EXTRA_OECONF = "--without-pth-test "
 
 DEPENDS += "pthsem"
+RDEPENDS_${PN} = "pthsem"
 
 SRC_URI[md5sum] = "954350cf0d51fdfb31300945f111e6f3"
 SRC_URI[sha256sum] = "9cf9019dcd8456b49f5b51ae78042f4b530845029d0d569230016522e8063cc6"
