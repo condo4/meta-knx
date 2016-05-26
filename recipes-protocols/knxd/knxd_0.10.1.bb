@@ -8,7 +8,7 @@ SRC_URI = "https://github.com/knxd/knxd/archive/v${PV}.tar.gz \
 
 inherit autotools-brokensep gettext pkgconfig
 
-EXTRA_OECONF = "--without-pth-test "
+EXTRA_OECONF = "--without-pth-test --enable-eibnetip --enable-eibnetiptunnel --enable-usb --enable-eibnetipserver"
 
 DEPENDS += "pthsem"
 RDEPENDS_${PN} = "pthsem"
