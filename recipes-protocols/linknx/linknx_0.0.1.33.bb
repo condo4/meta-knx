@@ -13,7 +13,7 @@ S = "${WORKDIR}/linknx-master"
 EXTRA_OECONF = "--without-pth-test "
 
 DEPENDS += "pthsem mariadb"
-RDEPENDS_${PN} = "pthsem mariadb knxd"
+RDEPENDS_${PN} = "pthsem mariadb knxd libcurl"
 
 SRC_URI[md5sum] = "2ed33a43b0124b1f02ca0110f0ffb520"
 SRC_URI[sha256sum] = "9e4ad914756c103b4802bede5f65c7f98e5fb86b8c29d62eac8eb169601a7450"
