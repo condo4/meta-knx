@@ -10,7 +10,7 @@ inherit autotools-brokensep gettext pkgconfig
 
 EXTRA_OECONF = "--without-pth-test --enable-eibnetip --enable-eibnetiptunnel --enable-usb --enable-eibnetipserver"
 
-DEPENDS += "pthsem"
+DEPENDS += "pthsem libusb1"
 RDEPENDS_${PN} = "pthsem"
 
 SRC_URI[md5sum] = "954350cf0d51fdfb31300945f111e6f3"
