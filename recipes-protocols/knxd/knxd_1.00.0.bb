@@ -29,7 +29,7 @@ inherit autotools-brokensep gettext pkgconfig useradd
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system knxd"
-USERADD_PARAM_${PN} =  "--system --disabled-login --home /var/lib/knxd --no-create-home --gid knxd knxd"
+USERADD_PARAM_${PN} =  "--system --home /var/lib/knxd --no-create-home --gid knxd knxd"
 
 do_install_append() {
     if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)};
