@@ -3,26 +3,22 @@ SECTION = "base"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
 
-SRC_URI = "https://github.com/knxd/knxd/archive/master.tar.gz \
-			file://use-pkgconfig-instead-of-pth-config.patch"
+SRC_URI = "https://github.com/knxd/knxd/archive/v${PV}.tar.gz"
 
-S = "${WORKDIR}/knxd-master"
+S = "${WORKDIR}/knxd-${PV}"
 
-SRC_URI[md5sum] = "032852611ea8271b4c8fa294def9c9f3"
-SRC_URI[sha256sum] = "12be4b572c9bfb07856fbd95953ded42c78d0840ecb9629180df2a82acbb422c"
+SRC_URI[md5sum] = "32e900e8caf75097ba0fdc5c7e3be42c"
+SRC_URI[sha256sum] = "eb5fc0eab9ab8461670c4ef95811c438fe0c8242759919b64048b615b6533dd0"
 
-DEPENDS += "pthsem libusb1 ${@bb.utils.contains('DISTRO_FEATURES', 'systemd','systemd', '', d)}"
-RDEPENDS_${PN} = "pthsem libusb1 ${@bb.utils.contains('DISTRO_FEATURES', 'systemd','libsystemd', '', d)}"
+DEPENDS += "cmake-native libusb1 libev ${@bb.utils.contains('DISTRO_FEATURES', 'systemd','systemd', '', d)}"
+RDEPENDS_${PN} = "libusb1 ${@bb.utils.contains('DISTRO_FEATURES', 'systemd','libsystemd', '', d)}"
 
 
 EXTRA_OECONF = " \
-    --without-pth-test \
     --enable-eibnetip \
     --enable-eibnetiptunnel \
     --enable-eibnetipserver \
-    --enable-usb \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd','--enable-systemd', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd','--with-systemd=${systemd_unitdir}/system/', '', d)} \
 "
 
 inherit autotools-brokensep gettext pkgconfig useradd
@@ -47,6 +43,6 @@ do_install_append() {
 
 PACKAGES =+ " ${PN}-exemples-dbg  ${PN}-exemples "
 
-FILES_${PN} += " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd','${systemd_unitdir}', '', d)} "
+FILES_${PN} += " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd','${systemd_unitdir} /usr/lib/sysusers.d', '', d)} "
 FILES_${PN}-exemples += "/usr/share/knxd/examples"
 FILES_${PN}-exemples-dbg += "/usr/share/knxd/examples/bin/.debug"
